@@ -7,17 +7,32 @@ public class Dog {
     */
     
     public Dog(int w) {
-        w = weight;
+        weight = w;
     }
 
     public void makeNoise() {
-        if (weight < 30) {
+        if (weight < 50) {
             System.out.println("yip yipyip");
-        } else if (weight < 60) {
+        } else if (weight < 100) {
             System.out.println("bark bark");
         } else {
             System.out.println("woooooof");
         }        
     }
-  
+
+    public static Dog maxDog(Dog d1 , Dog d2) {
+        System.out.println("This is the static maxDog");
+        if (d1.weight > d2.weight) {
+            return d1;
+        }
+        return d2;
+    }
+
+    public Dog maxDog(Dog d2) {
+        System.out.println("This is the instance maxDog");
+        if (this.weight > d2.weight) {
+            return this ;
+        }
+        return d2;  
+    }
 }
