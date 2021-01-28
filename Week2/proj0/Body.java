@@ -83,8 +83,8 @@ public class Body{
 		this.yyPos += dt*this.yyVel;
 	}
 
-	public void draw(void){
-		StdDraw.picture(0,0,"./images/starfield.jpg");
-		StdDraw.show();
+	public void draw(){
+		StdDraw.picture(this.xxPos,this.yyPos,"./images/" + this.imgFileName);
+		//StdDraw.show();
 	}
 }
