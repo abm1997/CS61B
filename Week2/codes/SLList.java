@@ -1,42 +1,48 @@
-public class SLList{
-	public static class IntNode{
-		public int item;
-		public IntNode next;
+public class SLList<sometype>{
+	public class StuffNode{
+		public sometype item;
+		public StuffNode next;
 		
-		public IntNode(int i , IntNode n){
+		public StuffNode(sometype i , StuffNode n){
 			item = i;
 			next = n;
 		}
 	}
 
-	private IntNode sentinel;
-	public int size;
+	private StuffNode sentinel;
+	public StuffNode last;
+	private int size;
 
 	public SLList(){ //constructor for the empty list
-		sentinel = new IntNode(63,null);
+		sentinel = new StuffNode(null,null);
 		size = 0;
+		last = sentinel;
 	}
-	public SLList(int x){
-		sentinel = new IntNode(63,null);
-		sentinel.next = new IntNode(x,null);
+	public SLList(sometype x){
+		sentinel = new StuffNode(null,null);
+		sentinel.next = new StuffNode(x,null);
 		size = 1;
+		last = sentinel.next;
 	}
 
-	public void addFirst(int x){
-		sentinel.next = new IntNode(x,sentinel.next);
+	public void addFirst(sometype x){ 
+		sentinel.next = new StuffNode(x,sentinel.next);
+		if (last == sentinel) last = sentinel.next; //special case for the empty list first item.
 		size++;
 	}
 
-	public int getFirst(){
+	public sometype getFirst(){
 		return sentinel.next.item;
 	}
 
-	public void addLast(int x){
-		IntNode p = sentinel;
+	public void addLast(sometype x){
+		/*StuffNode p = sentinel;
 		while (p.next != null){
 			p = p.next;
 		}
-		p.next = new IntNode(x,null);
+		p.next = new StuffNode(x,null);*/
+		last.next = new StuffNode(x,null);
+		last = last.next;
 		size++;
 	}
 
@@ -45,7 +51,7 @@ public class SLList{
 		SLList class not IntNode class and can't make recursive method that 
 		is called by IntNode object
 	
-	public static int size(IntNode p){
+	public static int size(StuffNode p){
 		if (p.next == null){
 			return 1;
 		} else {
@@ -63,10 +69,11 @@ public class SLList{
 
 
 	public static void main(String[] args) {
-		SLList L = new SLList(15);
-		L.addLast(10);	
-		L.addLast(5);
-		L.addFirst(20);	
-		System.out.println(L.size());
+		SLList<String> L = new SLList<>();
+		L.addFirst("111");
+		L.addLast("222generic");
+		System.out.println(L.last.item);
+
+		
 	}
 }
